@@ -2,13 +2,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { runExportSideEffects } from './export-side-effects';
 import {
   prepareServers,
   setupServer,
   RUNTIME_EXPO_SERVE,
   RUNTIME_WORKERD,
 } from '../../utils/runtime';
+import { runExportSideEffects } from './export-side-effects';
 
 runExportSideEffects();
 
@@ -21,7 +21,10 @@ const GLOBAL_HEADERS = {
 
 const PAGE_HEADERS = [
   { source: '/', headers: { 'X-Page-Rule': 'index', 'X-Powered-By': 'page-override' } },
-  { source: '/api', headers: { 'Set-Cookie': ['page=1'], 'Content-Type': 'text/should-not-apply' } },
+  {
+    source: '/api',
+    headers: { 'Set-Cookie': ['page=1'], 'Content-Type': 'text/should-not-apply' },
+  },
   { source: '/blog', headers: { 'X-Page-Rule': 'blog' } },
 ];
 
